@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="flight-4Flow" doc:id="998e631f-d778-49ec-9856-940141808603" >
+		<http:listener doc:name="Listener" doc:id="20d055de-b897-40ed-a068-f96d36940b87" config-ref="HTTP_Listener_config" path="/flight-5"/>
+		<db:select doc:name="Select" doc:id="aac44086-a302-4fc5-a2d7-47b341fff1bc" config-ref="Database_Config">
+			<db:sql ><![CDATA[select * from american ]]></db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="16fdbd27-5531-405a-806e-61123c8d2f78" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
